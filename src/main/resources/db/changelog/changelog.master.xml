@@ -6,5 +6,21 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="/db/changelog/changelog-1.0.xml"/>
+    
+    <changeSet id="1" author="Kadi">
+        <createTable tableName="weather_data">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="text">
+            </column>
+            <column name="temperature" type="numeric(2, 1)">
+            </column>
+            <column name="wind_speed_mph" type="numeric(2, 1)">
+            </column>
+            <column name="wind_direction" type="text">
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
