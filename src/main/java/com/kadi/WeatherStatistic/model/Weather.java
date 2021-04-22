@@ -1,27 +1,31 @@
 package com.kadi.WeatherStatistic.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "weather")
 public class Weather {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "timestamp")
-    private LocalDateTime timestamp;
-    @Column(name = "city")
-    private Integer city;
-    @Column(name = "temperature")
-    private Double temperature;
+    private String timestamp;
+    @Column(name = "city_id", insertable = false, updatable = false)
+    private Integer cityId;
+    private String temperature;
     @Column(name = "wind_speed_mph")
-    private Double windSpeed;
+    private String windSpeed;
     @Column(name = "wind_direction")
     private String windDirection;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private Cities cities;
 }

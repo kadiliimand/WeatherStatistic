@@ -5,17 +5,26 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="1" author="Kadi">
+        <createTable tableName="cities">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="text">
+            </column>
+        </createTable>
+
         <createTable tableName="weather">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="timestamp" type="text">
             </column>
-            <column name="city" type="text">
+            <column name="city_id" type="int">
+                <constraints foreignKeyName="fk_weather_cities" references="cities(id)"/>
             </column>
-            <column name="temperature" type="numeric(2, 1)">
+            <column name="temperature" type="text">
             </column>
-            <column name="wind_speed_mph" type="numeric(2, 1)">
+            <column name="wind_speed_mph" type="text">
             </column>
             <column name="wind_direction" type="text">
             </column>
