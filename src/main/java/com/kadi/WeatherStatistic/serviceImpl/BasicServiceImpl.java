@@ -7,25 +7,19 @@ import com.kadi.WeatherStatistic.model.WeatherInfoFromApi;
 import com.kadi.WeatherStatistic.repository.CityRepository;
 import com.kadi.WeatherStatistic.repository.WeatherRepository;
 import com.kadi.WeatherStatistic.service.BasicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BasicServiceImpl implements BasicService {
 
-    private WeatherapiConnector weatherapiConnector;
-    private WeatherRepository weatherRepository;
-    private CityRepository cityRepository;
-
-    @Autowired
-    public BasicServiceImpl(WeatherapiConnector weatherapiConnector, WeatherRepository weatherRepository, CityRepository cityRepository) {
-        this.weatherapiConnector = weatherapiConnector;
-        this.weatherRepository = weatherRepository;
-        this.cityRepository = cityRepository;
-    }
+    private final WeatherapiConnector weatherapiConnector;
+    private final WeatherRepository weatherRepository;
+    private final CityRepository cityRepository;
 
     @Scheduled(fixedDelay = 90000)
     public void scheduledUpdateOfData(){

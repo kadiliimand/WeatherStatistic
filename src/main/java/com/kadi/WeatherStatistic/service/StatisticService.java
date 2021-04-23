@@ -1,11 +1,9 @@
 package com.kadi.WeatherStatistic.service;
 
-import java.util.List;
-
 public interface StatisticService {
-    Double getAverageTemp(String city);
+    double getAverageTemp(String city);
 
-    String getAverageWindSpeed(String city);
+    double getAverageWindSpeed(String city);
 
     String getPopWindDirect(String city);
 }

@@ -3,7 +3,7 @@ package com.kadi.WeatherStatistic.serviceImpl;
 import com.kadi.WeatherStatistic.model.Weather;
 import com.kadi.WeatherStatistic.repository.WeatherRepository;
 import com.kadi.WeatherStatistic.service.StatisticService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,61 +12,48 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class StatisticServiceImpl implements StatisticService {
 
-    private WeatherRepository weatherRepository;
-
-    @Autowired
-    public StatisticServiceImpl(WeatherRepository weatherRepository) {
-        this.weatherRepository = weatherRepository;
-    }
+    private final WeatherRepository weatherRepository;
 
     @Override
-    public Double getAverageTemp(String city) {
+    public double getAverageTemp(String city) {
+        double sumTemp = 0;
+        double averageTemp = 0;
         List<Weather> listOfData = weatherRepository.findByCity(city);
         if (listOfData.size() >= 3) {
-            return averageTempCalc(listOfData);
+            for (int i = 0; i < listOfData.size(); i++) {
+                double temp = Double.parseDouble(listOfData.get(i).getTemperature());
+                sumTemp += temp;
+                averageTemp = sumTemp / listOfData.size();
+            }
+            return averageTemp;
         }
         return 0.0;
     }
 
-    private double averageTempCalc(List<Weather> listOfData) {
-        double sumTemp = 0;
-        double averageTemp = 0;
-
-        for (int i = 0; i < listOfData.size(); i++) {
-            double temp = Double.parseDouble(listOfData.get(i).getTemperature());
-            sumTemp += temp;
-            averageTemp = sumTemp / listOfData.size();
-        }
-        return averageTemp;
-    }
-
     @Override
-    public String getAverageWindSpeed(String city) {
+    public double getAverageWindSpeed(String city) {
         List<Weather> listOfData = weatherRepository.findByCity(city);
-        if (listOfData.size() >= 3) {
-            return "Average wind speed in " + city + ": " + averageWindSpeedCalc(listOfData) + " mph.";
-        }
-        return "Insufficient data for statistic!";
-    }
-
-    private double averageWindSpeedCalc(List<Weather> listOfData) {
         double sumWindSpeed = 0;
         double averageWindSpeed = 0;
-        for (int i = 0; i < listOfData.size(); i++) {
-            double temp = Double.parseDouble(listOfData.get(i).getWindSpeed());
-            sumWindSpeed += temp;
-            averageWindSpeed = sumWindSpeed / listOfData.size();
+        if (listOfData.size() >= 3) {
+            for (int i = 0; i < listOfData.size(); i++) {
+                double temp = Double.parseDouble(listOfData.get(i).getWindSpeed());
+                sumWindSpeed += temp;
+                averageWindSpeed = sumWindSpeed / listOfData.size();
+            }
+            return averageWindSpeed;
         }
-        return averageWindSpeed;
+        return 0.0;
     }
 
     @Override
-    public String getPopWindDirect(String city) {
+    public String  getPopWindDirect(String city) {
         List<Weather> listOfData = weatherRepository.findByCity(city);
         if (listOfData.size() >= 3) {
-            return "Most popular wind direction in " + city + " is " + mostPopWindDirect(listOfData);
+            return mostPopWindDirect(listOfData);
         }
         return "Insufficient data for statistic!";
     }
@@ -79,12 +66,7 @@ public class StatisticServiceImpl implements StatisticService {
 
         Map<String, Integer> map = new HashMap<>();
         for (int j = 0; j < listOfWindDir.size(); j++) {
-            Integer count = map.get(listOfWindDir.get(j));
-            if(count == null){
-                map.put(listOfWindDir.get(j), 1);
-            } else {
-                map.put(listOfWindDir.get(j), count + 1);
-            }
+            map.merge(listOfWindDir.get(j), 1, Integer::sum);
         }
         String mostPopResult = null;
         int maxVal = -1;
@@ -96,6 +78,4 @@ public class StatisticServiceImpl implements StatisticService {
         }
         return mostPopResult;
     }
-
-
 }
