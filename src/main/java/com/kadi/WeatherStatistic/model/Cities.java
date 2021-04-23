@@ -1,5 +1,6 @@
 package com.kadi.WeatherStatistic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Cities {
     private Integer id;
     private String city;
 
+    /*@JsonIgnore
     @OneToMany(mappedBy = "cities")
-    private List<Weather> weatherList;
+    private List<Weather> weatherList;*/
 }

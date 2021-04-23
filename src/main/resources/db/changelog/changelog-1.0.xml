@@ -19,8 +19,7 @@
             </column>
             <column name="timestamp" type="text">
             </column>
-            <column name="city_id" type="int">
-                <constraints foreignKeyName="fk_weather_cities" references="cities(id)"/>
+            <column name="city" type="text">
             </column>
             <column name="temperature" type="text">
             </column>
