@@ -6,7 +6,7 @@ import com.kadi.WeatherStatistic.model.WeatherInfoFromApi;
 import java.util.List;
 
 
-public interface WeatherBasicService {
+public interface BasicService {
 
     List<Cities> getAllCities();
 

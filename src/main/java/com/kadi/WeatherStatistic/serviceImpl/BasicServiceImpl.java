@@ -6,7 +6,7 @@ import com.kadi.WeatherStatistic.model.Weather;
 import com.kadi.WeatherStatistic.model.WeatherInfoFromApi;
 import com.kadi.WeatherStatistic.repository.CityRepository;
 import com.kadi.WeatherStatistic.repository.WeatherRepository;
-import com.kadi.WeatherStatistic.service.WeatherBasicService;
+import com.kadi.WeatherStatistic.service.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class WeatherBasicServiceImpl implements WeatherBasicService {
+public class BasicServiceImpl implements BasicService {
 
     private WeatherapiConnector weatherapiConnector;
     private WeatherRepository weatherRepository;
     private CityRepository cityRepository;
 
     @Autowired
-    public WeatherBasicServiceImpl(WeatherapiConnector weatherapiConnector, WeatherRepository weatherRepository, CityRepository cityRepository) {
+    public BasicServiceImpl(WeatherapiConnector weatherapiConnector, WeatherRepository weatherRepository, CityRepository cityRepository) {
         this.weatherapiConnector = weatherapiConnector;
         this.weatherRepository = weatherRepository;
         this.cityRepository = cityRepository;
