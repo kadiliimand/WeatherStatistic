@@ -18,6 +18,8 @@ public class CityStatisticServiceImpl implements CityStatisticService {
     private final WeatherRepository weatherRepository;
     private final StatisticServiceImpl statisticService;
 
+    String ERROR_MESSAGE = "Insufficient data for statistic!";
+
     @Override
     public String getCityWithMaxTemp() {
         List<Weather> listOfAll = weatherRepository.findAll();
@@ -35,7 +37,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMaxTemp != null;
             return cityWithMaxTemp.getKey();
         }
-        throw new WeatherException("Insufficient data for statistic!");
+        throw new WeatherException(ERROR_MESSAGE);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMinTemp != null;
             return cityWithMinTemp.getKey();
         }
-        throw new WeatherException("Insufficient data for statistic!");
+        throw new WeatherException(ERROR_MESSAGE);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMaxWind != null;
             return cityWithMaxWind.getKey();
         }
-        throw new WeatherException("Insufficient data for statistic!");
+        throw new WeatherException(ERROR_MESSAGE);
     }
 
     @Override
@@ -95,6 +97,6 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMinWind != null;
             return cityWithMinWind.getKey();
         }
-        throw new WeatherException("Insufficient data for statistic!");
+        throw new WeatherException(ERROR_MESSAGE);
     }
 }

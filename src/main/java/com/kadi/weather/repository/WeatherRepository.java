@@ -9,4 +9,5 @@ public interface WeatherRepository extends JpaRepository<Weather, Integer> {
 
     List<Weather> findByCity(String city);
 
+    void deleteByCity(String city);
 }

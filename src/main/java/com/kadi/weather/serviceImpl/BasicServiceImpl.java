@@ -68,7 +68,14 @@ public class BasicServiceImpl implements BasicService {
     @Override
     public String deleteCity(String city) {
         Cities id = cityRepository.findByCity(city);
+        List<Weather> weatherList = weatherRepository.findByCity(city);
+        if(id == null){
+            throw new WeatherException("City doesn't exist in database!");
+        }
         cityRepository.deleteById(id.getId());
+        for (Weather weather : weatherList) {
+            weatherRepository.deleteById(weather.getId());
+        }
         return "Deleted!";
     }
 }

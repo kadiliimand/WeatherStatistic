@@ -7,7 +7,7 @@ https://github.com/kadiliimand/WeatherStatistic
 
 **2. Run**
 ```bash
-src / main / java / com / kadi / WeatherStatistic / WeatherStatisticApplication 
+src / main / java / com / kadi / weather / WeatherStatisticApplication 
 ```
 
 **3. Database**
@@ -19,7 +19,9 @@ Database: H2
 + Go to browser:  `http://localhost:8085/h2-console`
 + In Login window click: `Connect`
 
-**Important: Please add into CITIES table at least one city, before making requests from a database!**
+**Important: 
+1. Statistics inherits are displayed ONLY when there are at least 3 records by every city on the database!
+2. Please add into CITIES table at least one city, before making requests from a database!**
 
 To do that, insert into terminal, for example:
 ```bash

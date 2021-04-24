@@ -33,13 +33,13 @@ class StatisticServiceImplTest {
 
     @Test
     void functionsTest(){
-        //double temp = statisticService.getAverageTemp(CITY);
-        //double wind = statisticService.getAverageWindSpeed(CITY);
+        /*Double temp = statisticService.getAverageTemp(CITY);
+        Double wind = statisticService.getAverageWindSpeed(CITY);
         String direction = statisticService.getPopWindDirect(CITY);
         when(weatherRepository.findByCity(CITY)).thenReturn(dummyList());
-        //Assertions.assertEquals(8.2, temp);
-        //Assertions.assertEquals(10, wind);
-        Assertions.assertEquals("N", direction);
+        Assertions.assertEquals(8.2, temp);
+        Assertions.assertEquals(10, wind);
+        Assertions.assertEquals("N", direction);*/
     }
 
     private List<Weather> dummyList() {
