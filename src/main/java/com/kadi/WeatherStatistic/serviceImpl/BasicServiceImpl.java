@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.SchedulingConfiguration;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class BasicServiceImpl implements BasicService {
             Weather weather = new Weather();
             weather.setCity(weatherInfoFromApi.getLocation().getName());
             weather.setTemperature(weatherInfoFromApi.getCurrent().getTemp_c());
-            weather.setTimestamp(weatherInfoFromApi.getLocation().getLocaltime());
+            weather.setTimestamp(LocalDateTime.now().toString());
             weather.setWindDirection(weatherInfoFromApi.getCurrent().getWind_dir());
             weather.setWindSpeed(weatherInfoFromApi.getCurrent().getWind_mph());
             weatherRepository.save(weather);
@@ -51,7 +52,7 @@ public class BasicServiceImpl implements BasicService {
         Weather weather = new Weather();
         weather.setCity(weatherInfoFromApi.getLocation().getName());
         weather.setTemperature(weatherInfoFromApi.getCurrent().getTemp_c());
-        weather.setTimestamp(weatherInfoFromApi.getLocation().getLocaltime());
+        weather.setTimestamp(LocalDateTime.now().toString());
         weather.setWindDirection(weatherInfoFromApi.getCurrent().getWind_dir());
         weather.setWindSpeed(weatherInfoFromApi.getCurrent().getWind_mph());
         weatherRepository.save(weather);
