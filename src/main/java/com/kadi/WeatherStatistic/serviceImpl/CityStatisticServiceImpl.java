@@ -1,5 +1,6 @@
 package com.kadi.WeatherStatistic.serviceImpl;
 
+import com.kadi.WeatherStatistic.exception.WeatherException;
 import com.kadi.WeatherStatistic.model.Weather;
 import com.kadi.WeatherStatistic.repository.WeatherRepository;
 import com.kadi.WeatherStatistic.service.CityStatisticService;
@@ -34,7 +35,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMaxTemp != null;
             return cityWithMaxTemp.getKey();
         }
-        return "Insufficient data for statistic!";
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     @Override
@@ -54,7 +55,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMinTemp != null;
             return cityWithMinTemp.getKey();
         }
-        return "Insufficient data for statistic!";
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     @Override
@@ -74,7 +75,7 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMaxWind != null;
             return cityWithMaxWind.getKey();
         }
-        return "Insufficient data for statistic!";
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     @Override
@@ -94,6 +95,6 @@ public class CityStatisticServiceImpl implements CityStatisticService {
             assert cityWithMinWind != null;
             return cityWithMinWind.getKey();
         }
-        return "Insufficient data for statistic!";
+        throw new WeatherException("Insufficient data for statistic!");
     }
 }

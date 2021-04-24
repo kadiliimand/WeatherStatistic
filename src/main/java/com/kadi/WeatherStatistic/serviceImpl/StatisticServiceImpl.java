@@ -1,5 +1,6 @@
 package com.kadi.WeatherStatistic.serviceImpl;
 
+import com.kadi.WeatherStatistic.exception.WeatherException;
 import com.kadi.WeatherStatistic.model.Weather;
 import com.kadi.WeatherStatistic.repository.WeatherRepository;
 import com.kadi.WeatherStatistic.service.StatisticService;
@@ -30,7 +31,7 @@ public class StatisticServiceImpl implements StatisticService {
             }
             return averageTemp;
         }
-        return null;
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     @Override
@@ -46,7 +47,7 @@ public class StatisticServiceImpl implements StatisticService {
             }
             return averageWindSpeed;
         }
-        return null;
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     @Override
@@ -55,7 +56,7 @@ public class StatisticServiceImpl implements StatisticService {
         if (listOfData.size() >= 3) {
             return mostPopWindDirect(listOfData);
         }
-        return "Insufficient data for statistic!";
+        throw new WeatherException("Insufficient data for statistic!");
     }
 
     private String mostPopWindDirect(List<Weather> listOfData) {

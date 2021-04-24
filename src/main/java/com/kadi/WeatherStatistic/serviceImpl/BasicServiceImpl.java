@@ -1,6 +1,7 @@
 package com.kadi.WeatherStatistic.serviceImpl;
 
 import com.kadi.WeatherStatistic.connector.WeatherapiConnector;
+import com.kadi.WeatherStatistic.exception.WeatherException;
 import com.kadi.WeatherStatistic.model.Cities;
 import com.kadi.WeatherStatistic.model.Weather;
 import com.kadi.WeatherStatistic.model.WeatherInfoFromApi;
@@ -43,7 +44,7 @@ public class BasicServiceImpl implements BasicService {
     public String addNewCityInList(String city) {
         Cities existingCity = cityRepository.findByCity(city);
         if (existingCity != null){
-            return "This city is already in list!";
+            throw new WeatherException("This city is already in list!");
         }
         Cities cities = new Cities();
         cities.setCity(city);
