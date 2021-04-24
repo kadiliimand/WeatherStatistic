@@ -18,10 +18,10 @@ public class StatisticServiceImpl implements StatisticService {
     private final WeatherRepository weatherRepository;
 
     @Override
-    public double getAverageTemp(String city) {
+    public Double getAverageTemp(String city) {
+        List<Weather> listOfData = weatherRepository.findByCity(city);
         double sumTemp = 0;
         double averageTemp = 0;
-        List<Weather> listOfData = weatherRepository.findByCity(city);
         if (listOfData.size() >= 3) {
             for (int i = 0; i < listOfData.size(); i++) {
                 double temp = Double.parseDouble(listOfData.get(i).getTemperature());
@@ -30,11 +30,11 @@ public class StatisticServiceImpl implements StatisticService {
             }
             return averageTemp;
         }
-        return 0.0;
+        return null;
     }
 
     @Override
-    public double getAverageWindSpeed(String city) {
+    public Double getAverageWindSpeed(String city) {
         List<Weather> listOfData = weatherRepository.findByCity(city);
         double sumWindSpeed = 0;
         double averageWindSpeed = 0;
@@ -46,11 +46,11 @@ public class StatisticServiceImpl implements StatisticService {
             }
             return averageWindSpeed;
         }
-        return 0.0;
+        return null;
     }
 
     @Override
-    public String  getPopWindDirect(String city) {
+    public String getPopWindDirect(String city) {
         List<Weather> listOfData = weatherRepository.findByCity(city);
         if (listOfData.size() >= 3) {
             return mostPopWindDirect(listOfData);
@@ -60,18 +60,18 @@ public class StatisticServiceImpl implements StatisticService {
 
     private String mostPopWindDirect(List<Weather> listOfData) {
         List<String> listOfWindDir = new ArrayList<>();
-        for (int i = 0; i < listOfData.size(); i++) {
-            listOfWindDir.add(listOfData.get(i).getWindDirection());
+        for (Weather listOfDatum : listOfData) {
+            listOfWindDir.add(listOfDatum.getWindDirection());
         }
 
         Map<String, Integer> map = new HashMap<>();
-        for (int j = 0; j < listOfWindDir.size(); j++) {
-            map.merge(listOfWindDir.get(j), 1, Integer::sum);
+        for (String s : listOfWindDir) {
+            map.merge(s, 1, Integer::sum);
         }
         String mostPopResult = null;
         int maxVal = -1;
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if(entry.getValue() > maxVal){
+            if (entry.getValue() > maxVal) {
                 mostPopResult = entry.getKey();
                 maxVal = entry.getValue();
             }

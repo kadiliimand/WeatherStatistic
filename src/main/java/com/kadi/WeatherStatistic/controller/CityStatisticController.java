@@ -2,6 +2,7 @@ package com.kadi.WeatherStatistic.controller;
 
 import com.kadi.WeatherStatistic.service.CityStatisticService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +23,15 @@ public class CityStatisticController {
     @GetMapping("minTemp")
     ResponseEntity<String> getCityWithMinTemp(){
         return ResponseEntity.ok(cityStatisticService.getCityWithMinTemp());
+    }
+
+    @GetMapping("maxWind")
+    ResponseEntity<String> getCityWithMaxWind(){
+        return ResponseEntity.ok(cityStatisticService.getCityWithMaxWind());
+    }
+
+    @GetMapping("minWind")
+    ResponseEntity<String> getCityWithMinWind(){
+        return ResponseEntity.ok(cityStatisticService.getCityWithMinWind());
     }
 }

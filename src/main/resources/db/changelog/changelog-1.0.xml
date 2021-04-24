@@ -22,18 +22,6 @@
             <column name="wind_speed_mph" type="text"/>
             <column name="wind_direction" type="text"/>
         </createTable>
-
-        <createTable tableName="statistic">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="city" type="text"/>
-            <column name="temp_max" type="numeric (2, 1)"/>
-            <column name="temp_min" type="numeric (2, 1)"/>
-            <column name="wind_max" type="numeric (3, 1)"/>
-            <column name="wind_min" type="numeric(3, 1)"/>
-            <column name="pop_wind_direction" type="text"/>
-        </createTable>
     </changeSet>
 
 </databaseChangeLog>
